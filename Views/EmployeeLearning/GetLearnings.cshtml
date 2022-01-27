@@ -1,0 +1,72 @@
+﻿@model IEnumerable<EmployeeLearning>
+
+@{
+	ViewBag.Title = "Employee Learnings";
+}
+
+<h1>All Topics</h1>
+
+<div class="container">
+	<a asp-action="createlearning" asp-controller="employeelearning" asp-route-id="@ViewBag.EmployeeId">Add New Topic</a>
+	@if (Model.Any())
+	{
+		<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TopicId)
+                    </th>
+                    <th>
+                         @Html.DisplayNameFor(model => model.TopicName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Progress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TopicId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TopicName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Progress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a asp-action="EditLearning" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="DetailsLearning" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="DeleteLearning" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+	}
+	else
+	{
+		<h2>Currently no data available</h2>
+	}
+    <a asp-action="index" asp-controller="employees">Back to Employees</a>
+</div>

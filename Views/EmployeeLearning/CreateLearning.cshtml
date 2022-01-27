@@ -1,0 +1,49 @@
+﻿@model EmployeeLearning
+@inject IEmployeeLearningRepository repo
+
+@{
+	ViewBag.Title = "Add Learning";
+}
+
+<h1>Add Topic</h1>
+
+<div class="container">
+	<form class="create-form" method="post" asp-controller="employeelearning" asp-action="createlearning">
+			<div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="EmployeeId" class="form-control" hidden value=@ViewBag.EmployeeId/>
+            <input asp-for="TopicId" class="form-control" hidden value=0/>
+            <div class="form-group">
+                <label asp-for="TopicName" class="control-label"></label>
+                <select asp-for="TopicName" class="form-control" asp-items="repo.TopicsList()"></select>
+                <span asp-validation-for="TopicName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" type="date"/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" type="date" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Progress" class="control-label"></label>
+                <input asp-for="Progress" class="form-control" type="number"/>
+                <span asp-validation-for="Progress" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<StatusEnum>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualEndDate" class="control-label"></label>
+                <input asp-for="ActualEndDate" class="form-control" type="date"/>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>*@
+			
+            <button class="btn btn-primary">Create</button>
+            <a asp-action="getlearnings" asp-controller="employeelearning" asp-route-id="@ViewBag.EmployeeId">Back to Learnings</a>
+            </form>
+</div>
